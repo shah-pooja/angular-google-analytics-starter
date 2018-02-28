@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">{{title}}</a>
+  <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" [routerLink]="['/']">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/products']">Products</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/services']">Services</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/about']">About</a>
+      </li>
+      <li class="nav-item dropdown" dropdown>
+        <a dropdownToggle role="button" href="javscript:void(0);" class="nav-link dropdown-toggle btn btn-block"> Account<span class="caret"></span></a>
+          <div *dropdownMenu class="dropdown-menu"> <!-- {3} -->
+            <a class="dropdown-item" *ngIf="!username" role="button" style="cursor:pointer" (click)="login()">Log In</a>
+            <a class="dropdown-item" *ngIf="username" role="button" style="cursor:pointer">
+              <div>
+                {{fullName}}
+                <br>&nbsp;&nbsp;{{username}}
+                <br>&nbsp;&nbsp;{{memberSince}}
+              </div>
+            </a>
+            <a class="dropdown-item" *ngIf="username" role="button" (click)="logout()" style="cursor:pointer">Log Out</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Help</a>
+          </div>
+      </li>
+
+
+    </ul>
+    <!-- inject the our search-box -->
+    <app-search-box></app-search-box>
+  </div>
+</nav>
