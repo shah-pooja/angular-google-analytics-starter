@@ -2,7 +2,7 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.7.
 
-This project has a basic structure with a few page components using routing.  They main point of this is to show logging to google analytics.
+This project has a basic structure with a few page components using routing.  The project focuses on the ability to google analytics.
 
 ## What you need to know about this project
 
