@@ -51,6 +51,7 @@ export class GoogleAnalyticsService {
           try {
             ga('set', 'page', e.urlAfterRedirects);
             ga('send', 'pageview');
+            console.log(`logged url: ${e.urlAfterRedirects}`);
           } catch {
             // console.log('tracking not found');
           }

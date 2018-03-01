@@ -12,7 +12,8 @@ The main portion of this code can be found in:
 2. assets/js/google-analytics.js
 3. app.component.ts : wires up the service to do pageview tracking (technically this is all you need to to the pageview logs)
 
-Optional  sections
+Optional  sections:
+
 1. components/shared/navigation.componet.ts : shows custom event logging
 2. components/public/home.compoent.ts: shows more custom event logging
 
