@@ -60,7 +60,7 @@ In addiion to the normal page logging, you can log custom events from any compon
 
 	} catch (err) {
 		// i'm adding a numeric value here for additonal infomration
-	 	 this.googleAnalytics.trackEvent('error', err, ''[more info if needed], 100);
+	 	 this.googleAnalytics.trackEvent('error', err, '[more info if needed]', 100);
 	}
   	
 	
