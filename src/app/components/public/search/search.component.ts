@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { Subscriber } from 'rxjs/Subscriber';
+import { GoogleAnalyticsService } from '../../../services/google/analytics/google-analytics.service';
 
 @Component({
   selector: 'app-search',
@@ -10,10 +11,11 @@ import { Subscriber } from 'rxjs/Subscriber';
 })
 export class SearchComponent implements OnInit, OnDestroy {
 
+  public title = 'search';
   private subscription: Subscription;
   private query: string;
 
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  constructor(private route: ActivatedRoute, private router: Router, private googleaAnalytics: GoogleAnalyticsService) { }
 
 
   ngOnInit() {
@@ -23,6 +25,8 @@ export class SearchComponent implements OnInit, OnDestroy {
         // get the parameter of 'q' for our query, this is what we are expecting
         // if you want something else you should indicate it here
         this.query =  p['q'] || null;
+
+        this.googleaAnalytics.trackEvent('search', 'value', this.query);
     });
   }
 

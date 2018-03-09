@@ -12,14 +12,12 @@
       <li class="nav-item">
         <a class="nav-link" [routerLink]="['/products']">Products</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/services']">Services</a>
-      </li>
+
       <li class="nav-item">
         <a class="nav-link" [routerLink]="['/about']">About</a>
       </li>
       <li class="nav-item dropdown" dropdown>
-        <a dropdownToggle role="button" href="javscript:void(0);" class="nav-link dropdown-toggle btn btn-block"> Account<span class="caret"></span></a>
+        <a dropdownToggle role="button" class="nav-link dropdown-toggle" style="cursor:pointer"> Account <span class="caret"></span></a>
           <div *dropdownMenu class="dropdown-menu"> <!-- {3} -->
             <a class="dropdown-item" *ngIf="!username" role="button" style="cursor:pointer" (click)="login()">Log In</a>
             <a class="dropdown-item" *ngIf="username" role="button" style="cursor:pointer">
@@ -31,7 +29,7 @@
             </a>
             <a class="dropdown-item" *ngIf="username" role="button" (click)="logout()" style="cursor:pointer">Log Out</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Help</a>
+            <a class="dropdown-item" [routerLink]="['/help']">Help</a>
           </div>
       </li>
 

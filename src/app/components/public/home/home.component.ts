@@ -10,6 +10,8 @@ import { GoogleAnalyticsService } from '../../../services/google/analytics/googl
 })
 export class HomeComponent implements OnInit {
 
+  public title = 'home';
+  // only need to use the DI for googleAnalytics so we can track a custom event
   constructor(public googleAnalytics: GoogleAnalyticsService) { }
 
 
@@ -31,6 +33,10 @@ export class HomeComponent implements OnInit {
     }
 
 
+  }
+
+  logCustomEvent(): void {
+    this.googleAnalytics.trackEvent('custom', 'event', 'clicked');
   }
 
 

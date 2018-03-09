@@ -8,7 +8,7 @@ declare let ga: Function;
 // notes: npm install --save-dev @types/google.analytics
 @Injectable()
 
-
+/** */
 export class GoogleAnalyticsService {
 
 
@@ -21,11 +21,11 @@ export class GoogleAnalyticsService {
 
   /**
    * Track an event with your custom data in google analytics
-   *
-   * @param {string} category
-   * @param {string} label
-   * @param {string} [action=null]
-   * @param {number} [value=null]
+   * -
+   * @param {string} category Typically the object that was interacted with (e.g. 'Video')
+   * @param {string} label The type of interaction (e.g. 'play')
+   * @param {string} [action=null] Useful for categorizing events (e.g. 'Fall Campaign')
+   * @param {number} [value=null] A numeric value associated with the event (e.g. 42)
    * @memberof GoogleAnalyticsEventService
    */
   public trackEvent(category: string, label: string, action: string = null, value: number = null) {

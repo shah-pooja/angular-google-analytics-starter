@@ -17,9 +17,9 @@ import { ProductsComponent } from './components/public/products/products.compone
 import { SearchComponent } from './components/public/search/search.component';
 import { NavigationComponent } from './components/shared/navigation/navigation.component';
 import { AboutComponent } from './components/public/about/about.component';
-import { ServicesComponent } from './components/public/services/services.component';
 import { HomeComponent } from './components/public/home/home.component';
 import { SearchBoxComponent } from './components/shared/search-box/search-box.component';
+import { HelpComponent } from './components/public/help/help.component';
 
 
 
@@ -27,12 +27,12 @@ import { SearchBoxComponent } from './components/shared/search-box/search-box.co
   declarations: [
     AppComponent,
     AboutComponent,
-    ServicesComponent,
     HomeComponent,
     ProductsComponent,
     SearchComponent,
     NavigationComponent,
     SearchBoxComponent,
+    HelpComponent,
 
   ],
   imports: [
