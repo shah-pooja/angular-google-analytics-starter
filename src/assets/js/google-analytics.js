@@ -1,18 +1,19 @@
-// NOTES: add this to webpack, gulp or whatever, don't include in dev unless you want to track values in dev as well, or create a different UA id for dev etc -->
-// Google Analytics
 
+// removed the => function and made it function() for backward compatibility
+loadScript("https://www.google-analytics.com/analytics.js", function() {
 
-loadScript("https://www.google-analytics.com/analytics.js", () => {
-  window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+  window.ga=window.ga||function(){ (ga.q=ga.q||[]).push(arguments); };
+  ga.l=+new Date();
 
-  ga('create', 'UA-XXXXX-Y', 'auto'); // replace UA-XXXXX-Y with your google UAID
-  //ga('send', 'pageview'); <-- remove or comment out, we'll do this in the service
+  // removed the ga calls form here, they are now called in the service.
+  // this is more flexible and configurable.  UAID's can be be stored in the environment.*.ts files
+
 });
 
 
 function loadScript(url, callback){
 
-  var script = document.createElement("script")
+  var script = document.createElement("script");
   script.type = "text/javascript";
 
   if (script.readyState){  //IE

@@ -11,6 +11,14 @@ declare let ga: Function;
 /** */
 export class GoogleAnalyticsService {
 
+  private missingGaCount = 0;
+
+  // tslint:disable-next-line:no-non-null-assertion
+  private readonly logging = environment!.google!.analytics!.logging;
+  // tslint:disable-next-line:no-non-null-assertion
+  private readonly isActive: boolean = environment!.google!.analytics!.active;
+  // tslint:disable-next-line:no-non-null-assertion
+  private readonly UAId: string = environment!.google!.analytics!.uaId;
 
   private subscription: Subscription;
 
@@ -30,8 +38,7 @@ export class GoogleAnalyticsService {
    */
   public trackEvent(category: string, label: string, action: string = null, value: number = null) {
     try {
-      if(environment.production)
-      {
+      if (environment.production) {
         ga('send', 'event', { eventCategory: category, eventLabel: label,
           eventAction: action, eventValue: value
         } );
@@ -46,17 +53,57 @@ export class GoogleAnalyticsService {
 
 
   public subscribe() {
-    if (!this.subscription && environment.production) {
-      // subscribe to any router navigation and once it ends, write out the google script notices
-      this.subscription = this.router.events.subscribe( e => {
+
+    if (!this.subscription) {
+      this.subscription = this.router.events.subscribe(e => {
+
         if (e instanceof NavigationEnd) {
-          // this will find & use the ga function pulled via the google scripts
           try {
-            ga('set', 'page', e.urlAfterRedirects);
-            ga('send', 'pageview');
-            console.log(`logged url: ${e.urlAfterRedirects}`);
-          } catch {
-            // console.log('tracking not found');
+
+            if (this.isActive && this.UAId.length > 0) {
+
+
+              if (e.urlAfterRedirects && this.isOkToLog(e.urlAfterRedirects)) {
+
+                // ga should be available directly via the @types/google.analytics
+                // but I'm still having a problem with it, compile time seems to be good
+                // but then runtime fails, using (<any>window) to access it.
+                // if someone knows the reason why please let me know
+                if ((<any>window).ga) {
+                  (<any>window).ga('create', `${this.UAId}`, 'auto');
+                  (<any>window).ga('set', 'page', e.urlAfterRedirects);
+                  (<any>window).ga('send', 'pageview');
+                } else {
+                  // it appears that (<any>window).ga isn't available right away
+                  // typically fails on the first call, so we're giving it some slack with this.missGaCount
+                  // we may also want to check for headless environment (e.g. AOT or testers running w/o the window object)
+                  if (this.logging && this.logging.exceptions && this.missingGaCount > 1) {
+                    console.error(`can't find <any>window).ga`);
+                  }
+
+                  // mark that we've been through this
+                  this.missingGaCount++;
+                }
+
+              }
+
+               if (this.logging && this.logging.debug) {
+                 console.log(`logging: ${e.urlAfterRedirects} to google analytics`);
+               }
+
+            } else {
+
+               if (this.logging && this.logging.debug) {
+                 console.log(`logging not enabled: ${e.urlAfterRedirects} to google analytics`);
+               }
+            }
+
+          } catch (ex) {
+
+             if (this.logging && this.logging.exceptions) {
+               console.error(ex);
+               console.error(`tracking failed - make sure you installed the scripts`);
+            }
           }
         }
       });
@@ -68,6 +115,23 @@ export class GoogleAnalyticsService {
       // --- clear our observable subscription
       this.subscription.unsubscribe();
     }
+  }
+
+  private isOkToLog(url: string): boolean {
+
+
+    if (url.toString().indexOf('auth/token') !== -1) {
+      if (this.logging && this.logging.verbose) {
+        console.log(`don't track ${url}`);
+      }
+      return false;
+    }
+
+    if (this.logging && this.logging.verbose) {
+      console.log(`track ${url}`);
+    }
+
+    return true;
   }
 
 }
