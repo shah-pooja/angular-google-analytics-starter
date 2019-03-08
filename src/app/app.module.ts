@@ -20,6 +20,7 @@ import { AboutComponent } from './components/public/about/about.component';
 import { HomeComponent } from './components/public/home/home.component';
 import { SearchBoxComponent } from './components/shared/search-box/search-box.component';
 import { HelpComponent } from './components/public/help/help.component';
+import { ServicesComponent } from './components/public/services/services.component';
 
 
 
@@ -33,6 +34,7 @@ import { HelpComponent } from './components/public/help/help.component';
     NavigationComponent,
     SearchBoxComponent,
     HelpComponent,
+    ServicesComponent
 
   ],
   imports: [
