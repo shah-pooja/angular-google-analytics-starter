@@ -13,7 +13,7 @@ export class SearchComponent implements OnInit, OnDestroy {
 
   public title = 'search';
   private subscription: Subscription;
-  private query: string;
+  public query: string;
 
   constructor(private route: ActivatedRoute, private router: Router, private googleaAnalytics: GoogleAnalyticsService) { }
 

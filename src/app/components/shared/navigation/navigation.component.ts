@@ -10,7 +10,7 @@ import { GoogleAnalyticsService } from '../../../services/google/analytics/googl
 })
 export class NavigationComponent implements OnInit {
 
-
+  title = '';
   username = '';
   fullName = '';
   memberSince = '';
