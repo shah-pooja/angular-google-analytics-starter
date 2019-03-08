@@ -4,5 +4,17 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  name: 'local-dev',
+  google: {
+    analytics: {
+      active: true,
+      uaId: 'UA-xxxxxxx-1',
+      logging : {
+        debug: true,
+        exceptions: true,
+        verbose: true,
+      }
+    }
+  }
 };
