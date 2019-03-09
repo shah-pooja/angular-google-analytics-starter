@@ -1,6 +1,6 @@
 # AngularGoogleAnalyticsStarter
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.7.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.5.
 
 This project has a basic structure with a few page components using routing.  The project focuses on the ability to google analytics.
 
@@ -11,6 +11,8 @@ The main portion of this code can be found in:
 1. app/services/google/analytics/google-analytics.service.ts.  
 2. assets/js/google-analytics.js
 3. app.component.ts : wires up the service to do pageview tracking (technically this is all you need to to the pageview logs)
+4. updated your environment variables, with the preferred settings for dev, prod, etc
+5. Add your UaId (google analytics id) to your environmnet variables
 
 Optional  sections:
 
@@ -24,10 +26,10 @@ The service sets up everything you need to use it from your componets.  The goog
 
 1. Set up general logging / page views.
 2. Set up custom event logging
-    1. Log an Login
-    2. Log a logout
-    3. Log an exception
-    4. Log a search
+    1. Log a Login
+    2. Log a Logout
+    3. Log an Exception
+    4. Log a Search
 
 ## Basic logging / page views
 
@@ -73,7 +75,17 @@ In addiion to the normal page logging, you can log custom events from any compon
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `ng serve` for a dev server `ng serve --prod` for a dev server with prod settings. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+Or
+
+```[bash]
+# dev start
+npm start
+
+# prod flag start
+npm start --prod
+```
 
 ## Code scaffolding
 
