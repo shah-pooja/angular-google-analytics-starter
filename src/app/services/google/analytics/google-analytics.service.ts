@@ -38,17 +38,22 @@ export class GoogleAnalyticsService {
    */
   public trackEvent(category: string, label: string, action: string = null, value: number = null) {
     try {
-      if (environment.production) {
+      if (this.isActive) {
         ga('send', 'event', { eventCategory: category, eventLabel: label,
           eventAction: action, eventValue: value
         } );
       }
     } catch (error) {
-      console.log(`error: ${error}`);
+      if (this.logging && this.logging.exceptions) {
+        console.error(`error: ${error}`);
+      }
+      
     }
 
     // testing
-    console.log(category, label, action, value);
+    if (this.logging && this.logging.debug) {
+      console.log(category, label, action, value);
+    } 
   }
 
 
